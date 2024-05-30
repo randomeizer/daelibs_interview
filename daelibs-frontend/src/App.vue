@@ -1,17 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <h1>Score List</h1>
+    <ScoreList :data="data" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { getData } from './services/dataService';
+import ScoreList from './components/ScoreList.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ScoreList
+  },
+  data() {
+    return {
+      data: []
+    };
+  },
+  created() {
+    this.data = getData();
   }
-}
+};
 </script>
 
 <style>
