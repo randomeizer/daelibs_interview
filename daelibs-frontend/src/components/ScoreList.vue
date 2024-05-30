@@ -14,7 +14,7 @@
         <tr v-for="(item, index) in data" :key="index">
           <td>{{ item.name }}</td>
           <td>{{ item.target }}%</td>
-          <td>
+          <td class="score-cell">
             <div :class="{'score-box': true, 'green': item.actual >= item.target, 'red': item.actual < item.target}">
               {{ item.actual }}%
             </div>
@@ -60,11 +60,19 @@ tr:hover {
   background-color: #f1f1f1;
 }
 
+.score-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .score-box {
   padding: 4px 8px;
   border-radius: 12px;
   color: white;
-  display: inline-block;
+  text-align: center;
+  width: 100%; /* Ensure the box takes the full width of the cell */
+  max-width: 100px; /* Optional: Set a max-width if needed */
 }
 
 .green {
