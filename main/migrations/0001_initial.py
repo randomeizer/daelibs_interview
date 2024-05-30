@@ -6,8 +6,13 @@ import datetime
 import time
 import random
 import pytz
+import os
 
 def insert_random_data(apps, schema_editor):
+    # Skip data insertion if running tests
+    if os.environ.get('RUNNING_TESTS', 'False') == 'True':
+        return
+
     Sensor = apps.get_model("main", "Sensor")
     SensorEvent = apps.get_model("main", "SensorEvent")
 

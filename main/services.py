@@ -1,24 +1,47 @@
-from django.db.models import Count
+"""Service functions for the main app."""
+
 from datetime import timedelta
+from django.db.models import Count
 from .models import Sensor
 from .utils import calculate_day_counts
 
 
 def get_day_of_week_average_count(start_date, end_date):
-    # Make end_date inclusive by adding one day to it
-    end_date_inclusive = end_date + timedelta(days=1)
+    """
+    Get the average event count for each day of the week in the date range.
+
+    Args:
+      start_date (datetime.date): The start date of the date range.
+      end_date (datetime.date): The end date of the date range.
+
+    Returns:
+      list: A list of dictionaries containing the average event count for each day of the week for each sensor.
+        Each dictionary contains the following keys:
+          - 'sensor_id': The ID of the sensor.
+          - 'sensor_name': The name of the sensor.
+          - 'mon_avg_count': The average event count for Monday.
+          - 'tue_avg_count': The average event count for Tuesday.
+          - 'wed_avg_count': The average event count for Wednesday.
+          - 'thu_avg_count': The average event count for Thursday.
+          - 'fri_avg_count': The average event count for Friday.
+          - 'sat_avg_count': The average event count for Saturday.
+          - 'sun_avg_count': The average event count for Sunday.
+    
+    Raises:
+      ValueError: If the start_date is after the end_date.
+    
+    Note:
+      Will return an empty list if the date range is empty/invalid, or if no sensors are found.
+    """
 
     # Calculate the number of occurrences of each day of the week in the date range
-    day_counts = {i: 0 for i in range(1, 8)}
-    current_date = start_date
-    while current_date < end_date_inclusive:
-        # Convert to 1-based index where Monday is 2
-        day_of_week = current_date.isoweekday() % 7 + 1
-        day_counts[day_of_week] += 1
-        current_date += timedelta(days=1)
+    day_counts = calculate_day_counts(start_date, end_date)
 
     response_data = []
     sensors = Sensor.objects.all()
+
+    # Make end_date inclusive by adding one day to it
+    end_date_inclusive = end_date + timedelta(days=1)
 
     for sensor in sensors:
         sensor_data = {

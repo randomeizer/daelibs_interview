@@ -1,3 +1,5 @@
+"""Defines URL patterns for main."""
+
 from django.urls import path
 from . import views
 
