@@ -1,19 +1,24 @@
+<!-- src/components/ScoreList.vue -->
 <template>
   <div>
     <table>
       <thead>
         <tr>
           <th>Name</th>
-          <th>Target Score</th>
-          <th>Actual Score</th>
-          <th>Total Points</th>
+          <th nowrap>Target&nbsp;Score</th>
+          <th nowrap>Actual&nbsp;Score</th>
+          <th nowrap>Total&nbsp;Points</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(item, index) in data" :key="index">
           <td>{{ item.name }}</td>
           <td>{{ item.target }}%</td>
-          <td :style="{ color: item.actual >= item.target ? 'green' : 'red' }">{{ item.actual }}%</td>
+          <td>
+            <div :class="{'score-box': true, 'green': item.actual >= item.target, 'red': item.actual < item.target}">
+              {{ item.actual }}%
+            </div>
+          </td>
           <td>{{ item.points }}</td>
         </tr>
       </tbody>
@@ -34,6 +39,7 @@ export default {
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: auto;
 }
 
 th, td {
@@ -46,7 +52,26 @@ th {
   background-color: #f4f4f4;
 }
 
+th:first-child {
+  width: 100%; /* Allow the Name column to stretch */
+}
+
 tr:hover {
   background-color: #f1f1f1;
+}
+
+.score-box {
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: white;
+  display: inline-block;
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
 }
 </style>
