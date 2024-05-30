@@ -113,10 +113,10 @@ tbody tr:hover td {
 
 /* Styles for the spacer columns */
 .spacer-column {
-  width: 52px; /* Default width for left spacer */
+  width: 52px;
 }
 
 .spacer-right {
-  width: 122px; /* Width for right spacer */
+  width: 122px;
 }
 </style>
