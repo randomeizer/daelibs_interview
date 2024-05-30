@@ -1,5 +1,12 @@
 # daelibs-frontend
 
+This is the frontend for the daelibs interview project.
+
+It is built with Vue 3.
+
+There is just a single page, which displays the ScoreList component. This component is a table that displays the scores of the users. The scores are fetched from the backend, which is just hard-coded
+in this example.
+
 ## Project setup
 
 ```shell
@@ -12,18 +19,4 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-
-```shell
-npm run build
-```
-
-### Lints and fixes files
-
-```shell
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Once the server is running, you can access the frontend at `http://localhost:8080/`.
